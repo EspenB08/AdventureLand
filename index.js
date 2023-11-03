@@ -4,15 +4,15 @@ const characters = {
     damage: 10,
   },
   archer: {
-    health: 25,
+    health: 50,
     damage: 18,
   },
   cat: {
-    health: 40,
+    health: 50,
     damage: 12,
   },
   boss: {
-    health: 15,
+    health: 150,
     damage: 5,
   },
   minion: {
