@@ -2,24 +2,30 @@ const characters = {
   knight: {
     health: 50,
     damage: 10,
+    attackSound: "sound/sword attack.wav",
   },
   archer: {
     health: 50,
     damage: 18,
+    attackSound: "sound/arrow attack.wav",
   },
   cat: {
     health: 50,
     damage: 12,
+    attackSound: "sound/cat attack.wav",
   },
   boss: {
     health: 150,
     damage: 5,
+    attackSound: "sound/boss attack.wav",
   },
   minion: {
     health: 0,
     damage: 0,
   },
 };
+const audioElement = document.createElement("audio");
+
 const character = [characters.knight, characters.archer, characters.cat];
 
 const bossTarget = Math.floor(Math.random() * character.length);
@@ -101,6 +107,8 @@ knight.addEventListener("click", () => {
   if (characters.knight.health < 1) {
     action.textContent = `The nameless knight is dead and cannot attack`;
   } else {
+    audioElement.src = characters.knight.attackSound;
+    audioElement.play();
     knightAttack();
     bossAttack();
   }
@@ -110,6 +118,8 @@ cat.addEventListener("click", () => {
   if (characters.cat.health < 1) {
     action.textContent = `cat is dead and cannot attack`;
   } else {
+    audioElement.src = characters.cat.attackSound;
+    audioElement.play();
     catAttack();
     bossAttack();
   }
@@ -119,6 +129,8 @@ archer.addEventListener("click", () => {
   if (characters.archer.health < 1) {
     action.textContent = `Julia the archer is dead and cannot attack`;
   } else {
+    audioElement.src = characters.archer.attackSound;
+    audioElement.play();
     archerAttack();
     bossAttack();
   }
@@ -218,18 +230,24 @@ function bossAttack() {
       if (attackTarget === 0 && characters.knight.health > 0) {
         damage = damageRoll(characters.boss.damage);
         characters.knight.health -= damage;
-        action.textContent = `Big boss attacks dealing ${damage} to the ${attackTarget}`;
+        action.textContent = `Big boss attacks dealing ${damage} to the Knight`;
         bossAttackCycle = 3000;
+        audioElement.src = characters.boss.attackSound;
+        audioElement.play();
       } else if (attackTarget === 1 && characters.cat.health > 0) {
         damage = damageRoll(characters.boss.damage);
         characters.cat.health -= damage;
-        action.textContent = `Big boss attacks dealing ${damage} to the ${attackTarget}`;
+        action.textContent = `Big boss attacks dealing ${damage} to the Cat`;
         bossAttackCycle = 3000;
+        audioElement.src = characters.boss.attackSound;
+        audioElement.play();
       } else if (attackTarget === 2 && characters.archer.health > 0) {
         damage = damageRoll(characters.boss.damage);
         characters.archer.health -= damage;
-        action.textContent = `Big boss attacks dealing ${damage} to the ${attackTarget}`;
+        action.textContent = `Big boss attacks dealing ${damage} to the Archer`;
         bossAttackCycle = 3000;
+        audioElement.src = characters.boss.attackSound;
+        audioElement.play();
       } else {
         bossAttackCycle = 0;
         bossAttack();
