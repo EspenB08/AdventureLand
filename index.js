@@ -25,6 +25,7 @@ const characters = {
   },
 };
 const audioElement = document.createElement("audio");
+audioElement.volume = 0.05
 
 const character = [characters.knight, characters.archer, characters.cat];
 
