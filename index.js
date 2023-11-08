@@ -24,8 +24,9 @@ const characters = {
     damage: 0,
   },
 };
+//audio settings
 const audioElement = document.createElement("audio");
-audioElement.volume = 0.05
+audioElement.volume = 0.05;
 
 const character = [characters.knight, characters.archer, characters.cat];
 
@@ -58,6 +59,10 @@ knightLifeBar.textContent = characters.knight.health;
 archerLifeBar.textContent = characters.archer.health;
 
 bossLifeBar.textContent = characters.boss.health;
+
+let knightTurn = true;
+let archerTurn = true;
+let catTurn = true;
 
 let bossAttackCycle = 3000;
 //check if heros are alive
@@ -107,33 +112,42 @@ function monsterSelector(monsterType) {
 knight.addEventListener("click", () => {
   if (characters.knight.health < 1) {
     action.textContent = `The nameless knight is dead and cannot attack`;
+  } else if (knightTurn === false) {
+    action.textContent = `it is not your turn yet`;
   } else {
     audioElement.src = characters.knight.attackSound;
     audioElement.play();
     knightAttack();
     bossAttack();
+    return (knightTurn = false);
   }
 });
 //listen for click on the cat to run an attack on boss or monster
 cat.addEventListener("click", () => {
   if (characters.cat.health < 1) {
     action.textContent = `cat is dead and cannot attack`;
+  } else if (catTurn === false) {
+    action.textContent = `it is not your turn yet`;
   } else {
     audioElement.src = characters.cat.attackSound;
     audioElement.play();
     catAttack();
     bossAttack();
+    return (catTurn = false);
   }
 });
 //listen for click on the archer to run an attack on boss or monster
 archer.addEventListener("click", () => {
   if (characters.archer.health < 1) {
     action.textContent = `Julia the archer is dead and cannot attack`;
+  } else if (archerTurn === false) {
+    action.textContent = `it is not your turn yet`;
   } else {
     audioElement.src = characters.archer.attackSound;
     audioElement.play();
     archerAttack();
     bossAttack();
+    return (archerTurn = false);
   }
 });
 
@@ -260,6 +274,9 @@ function bossAttack() {
       catLifeBar.textContent = characters.cat.health;
       knightLifeBar.textContent = characters.knight.health;
       archerLifeBar.textContent = characters.archer.health;
+      if (catTurn === false && knightTurn === false && archerTurn === false) {
+        return (catTurn = true), (knightTurn = true), (archerTurn = true);
+      }
     }, bossAttackCycle);
   }
 }
