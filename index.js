@@ -2,22 +2,27 @@ const characters = {
   knight: {
     health: 50,
     damage: 10,
-    attackSound: "sound/sword attack.wav",
+    //attackSound: "sound/sword attack.wav",
   },
   archer: {
     health: 50,
     damage: 18,
-    attackSound: "sound/arrow attack.wav",
+    //attackSound: "sound/arrow attack.wav",
   },
   cat: {
     health: 50,
     damage: 12,
-    attackSound: "sound/cat attack.wav",
+    //attackSound: "sound/cat attack.wav",
+  },
+  healer: {
+    heal: 5,
+    mana: 0,
+
   },
   boss: {
     health: 150,
     damage: 5,
-    attackSound: "sound/boss attack.wav",
+    //attackSound: "sound/boss attack.wav",
   },
   minion: {
     health: 0,
